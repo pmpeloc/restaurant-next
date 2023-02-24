@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Product {
@@ -17,6 +18,8 @@ model Product {
   image      String
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+
+  @@index([categoryId])
 }
 
 model Category {
@@ -24,4 +27,12 @@ model Category {
   name     String
   icon     String
   products Product[]
+}
+
+model Order {
+  id    Int    @id @default(autoincrement())
+  name  String
+  date  String
+  total Float
+  cart  Json
 }

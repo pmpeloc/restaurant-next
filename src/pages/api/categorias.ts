@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Categoria, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { Categoria } from 'prisma/types';
 
 const prisma = new PrismaClient();
 

@@ -1,4 +1,5 @@
-import { Categoria, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { Categoria } from 'prisma/types';
 
 interface Props {
   categorias: Categoria[];

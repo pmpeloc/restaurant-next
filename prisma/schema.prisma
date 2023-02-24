@@ -11,28 +11,28 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Float
-  image      String
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
+model Producto {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  precio      Float
+  imagen      String
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
 
-  @@index([categoryId])
+  @@index([categoriaId])
 }
 
-model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  icon     String
-  products Product[]
+model Categoria {
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  icono     String
+  productos Producto[]
 }
 
-model Order {
-  id    Int    @id @default(autoincrement())
-  name  String
-  date  String
-  total Float
-  cart  Json
+model Orden {
+  id     Int    @id @default(autoincrement())
+  nombre String
+  fecha  String
+  total  Float
+  pedido Json
 }

@@ -4,13 +4,13 @@ import { Categoria } from 'prisma/types';
 
 const prisma = new PrismaClient();
 
-type Data = {
+export interface ICategoriaAxios {
   categorias: Categoria[];
-};
+}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ICategoriaAxios>
 ) {
   const categorias = await prisma.categoria.findMany();
 

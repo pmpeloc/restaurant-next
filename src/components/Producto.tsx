@@ -1,4 +1,5 @@
 import { formatearDinero } from '@/helpers';
+import { useQuiosco } from '@/hooks/useQuiosco';
 import Image from 'next/image';
 import { Producto as IProducto } from 'prisma/types';
 
@@ -8,6 +9,8 @@ interface Props {
 
 export const Producto = ({ producto }: Props) => {
   const { nombre, imagen, precio } = producto;
+
+  const { isOpenModal, handleOpenModal, handleSetProducto } = useQuiosco();
 
   return (
     <div className='border p-3'>
@@ -22,6 +25,15 @@ export const Producto = ({ producto }: Props) => {
         <p className='mt-5 font-black text-4xl text-amber-500'>
           {formatearDinero(precio)}
         </p>
+        <button
+          type='button'
+          className='bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold'
+          onClick={() => {
+            handleSetProducto(producto);
+            handleOpenModal();
+          }}>
+          Agregar
+        </button>
       </div>
     </div>
   );

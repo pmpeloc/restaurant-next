@@ -1,6 +1,22 @@
+import { ModalProducto } from '@/components/ModalProducto';
 import { Sidebar } from '@/components/Sidebar';
+import { useQuiosco } from '@/hooks/useQuiosco';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+Modal.setAppElement('#__next');
 
 interface Props {
   children: ReactNode;
@@ -8,6 +24,8 @@ interface Props {
 }
 
 export default function Layout({ children, pagina }: Props) {
+  const { isOpenModal } = useQuiosco();
+
   return (
     <>
       <Head>
@@ -22,6 +40,10 @@ export default function Layout({ children, pagina }: Props) {
           <div className='p-10'>{children}</div>
         </main>
       </div>
+
+      <Modal isOpen={isOpenModal} style={customStyles}>
+        <ModalProducto />
+      </Modal>
     </>
   );
 }

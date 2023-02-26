@@ -5,6 +5,8 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 
 interface IQuiosco {
   categorias: Categoria[];
+  categoriaActual: Categoria;
+  handleClickCategoria: (id: number) => void;
 }
 
 export const QuioscoContext = createContext<IQuiosco>({} as IQuiosco);
@@ -15,6 +17,11 @@ interface Props {
 
 export const QuioscoProvider = ({ children }: Props) => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categoriaActual, setCategoriaActual] = useState<Categoria>({
+    id: 0,
+    icono: '',
+    nombre: '',
+  });
 
   const obtenerCategorias = async () => {
     const {
@@ -28,8 +35,14 @@ export const QuioscoProvider = ({ children }: Props) => {
     obtenerCategorias();
   }, []);
 
+  const handleClickCategoria = (id: number) => {
+    const categoria = categorias.find((cat) => cat.id === id);
+    setCategoriaActual(categoria!);
+  };
+
   return (
-    <QuioscoContext.Provider value={{ categorias }}>
+    <QuioscoContext.Provider
+      value={{ categorias, categoriaActual, handleClickCategoria }}>
       {children}
     </QuioscoContext.Provider>
   );

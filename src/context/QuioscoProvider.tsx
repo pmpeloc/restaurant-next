@@ -35,6 +35,12 @@ export const QuioscoProvider = ({ children }: Props) => {
     obtenerCategorias();
   }, []);
 
+  useEffect(() => {
+    if (categorias.length) {
+      setCategoriaActual(categorias[0]);
+    }
+  }, [categorias]);
+
   const handleClickCategoria = (id: number) => {
     const categoria = categorias.find((cat) => cat.id === id);
     setCategoriaActual(categoria!);

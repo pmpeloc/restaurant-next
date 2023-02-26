@@ -11,7 +11,7 @@ export default function Layout({ children, pagina }: Props) {
   return (
     <>
       <Head>
-        <title>Café - {pagina}</title>
+        <title>Restaurant - {pagina}</title>
         <meta name='description' content='Quiosco Cafetería' />
       </Head>
       <div className='md:flex'>
@@ -19,7 +19,7 @@ export default function Layout({ children, pagina }: Props) {
           <Sidebar />
         </aside>
         <main className='md:w-8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll'>
-          {children}
+          <div className='p-10'>{children}</div>
         </main>
       </div>
     </>

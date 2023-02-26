@@ -1,6 +1,8 @@
-import prisma from 'lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
 import { Categoria } from 'prisma/types';
+
+const prisma = new PrismaClient();
 
 export interface ICategoriaAxios {
   categorias: Categoria[];

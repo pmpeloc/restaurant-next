@@ -12,7 +12,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ICategoriaAxios>
 ) {
-  const categorias = await prisma.categoria.findMany();
+  const categorias = await prisma.categoria.findMany({
+    include: { productos: true },
+  });
 
   res.status(200).json({ categorias });
 }

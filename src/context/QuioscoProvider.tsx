@@ -21,6 +21,7 @@ export const QuioscoProvider = ({ children }: Props) => {
     id: 0,
     icono: '',
     nombre: '',
+    productos: [],
   });
 
   const obtenerCategorias = async () => {

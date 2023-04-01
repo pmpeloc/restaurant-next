@@ -11,12 +11,20 @@ interface IQuiosco {
   handleClickCategoria: (id: number) => void;
   handleSetProducto: (producto: Producto) => void;
   handleOpenModal: () => void;
+  handleAgregarPedido: (pedido: Pedido) => void;
 }
 
 export const QuioscoContext = createContext<IQuiosco>({} as IQuiosco);
 
 interface Props {
   children: ReactNode;
+}
+
+interface Pedido {
+  id: number;
+  nombre: string;
+  precio: number;
+  cantidad: number;
 }
 
 export const QuioscoProvider = ({ children }: Props) => {
@@ -35,6 +43,7 @@ export const QuioscoProvider = ({ children }: Props) => {
     nombre: '',
     precio: 0,
   });
+  const [pedido, setPedido] = useState<Pedido[]>([]);
 
   const obtenerCategorias = async () => {
     const {
@@ -67,6 +76,17 @@ export const QuioscoProvider = ({ children }: Props) => {
     setIsOpenModal(!isOpenModal);
   };
 
+  const handleAgregarPedido = (nuevoPedido: Pedido) => {
+    if (pedido.some((p) => p.id === nuevoPedido.id)) {
+      const pedidoActualizado = pedido.map((p) =>
+        p.id === nuevoPedido.id ? nuevoPedido : p
+      );
+      setPedido(pedidoActualizado);
+    } else {
+      setPedido([...pedido, nuevoPedido]);
+    }
+  };
+
   return (
     <QuioscoContext.Provider
       value={{
@@ -77,6 +97,7 @@ export const QuioscoProvider = ({ children }: Props) => {
         handleClickCategoria,
         handleSetProducto,
         handleOpenModal,
+        handleAgregarPedido,
       }}>
       {children}
     </QuioscoContext.Provider>
